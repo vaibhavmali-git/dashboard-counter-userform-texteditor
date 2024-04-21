@@ -86,7 +86,7 @@ const UserDataForm = () => {
       <div className="stored-data">
         <h3 style={{ textAlign: "center" }}>Stored Data</h3>
         {storedData.length === 0 ? (
-          <p>No stored data.</p>
+          <p style={{textAlign:"center", fontStyle:"italic", fontSize:"12px"}}>No stored data in localstorage.</p>
         ) : (
           <ul>
             {storedData.map((data, index) => (
