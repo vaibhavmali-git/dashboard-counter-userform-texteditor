@@ -1,0 +1,81 @@
+.user-profiles {
+  background: #ffffff;
+  padding: 20px;
+  display: flex;
+  flex-direction: row;
+  justify-content: flex-start;
+  align-items: center;
+  gap: 5rem;
+  height: 40vh;
+  margin-bottom: 11rem;
+}
+
+h1 {
+  padding: 4rem 9rem;
+}
+
+.user-profiles .user-details {
+  box-shadow: var(--shadow);
+  padding: 1rem 3rem;
+  border-radius: 10px;
+  flex: 1;
+  height: 50vh;
+  display: flex;
+  justify-content: center;
+  flex-direction: column;
+}
+
+.user-profiles .line-chart {
+  height: 50vh;
+  padding: 2rem;
+  border-radius: 10px;
+  box-shadow: var(--shadow);
+  display: flex;
+  justify-content: center;
+  width: 400px;
+}
+
+@media (max-width: 1024px) {
+  .user-profiles {
+    height: auto;
+    padding: 15px;
+    flex-direction: column;
+    gap: 3rem;
+  }
+
+  h1 {
+    padding: 1rem;
+  }
+
+  .user-profiles .user-details {
+    width: 100%;
+    height: auto;
+  }
+
+  .user-profiles .line-chart {
+    flex-direction: column;
+    max-width: 100%;
+    width: auto;
+    height: auto;
+  }
+}
+
+@media (max-width: 768px) {
+  .user-profiles {
+    padding: 10px;
+    gap: 2rem;
+    flex-direction: column; /* Ensures vertical stacking */
+  }
+
+  .user-profiles .user-details {
+    height: auto;
+    width: 350px; /* Full width */
+  }
+
+  .user-profiles .line-chart {
+    height: auto;
+    padding: 1rem;
+    max-width: 100%; /* Ensures it doesn't exceed parent width */
+    overflow: hidden; /* Prevents overflow */
+  }
+}

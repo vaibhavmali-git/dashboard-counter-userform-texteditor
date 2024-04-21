@@ -1,0 +1,35 @@
+.userform-titleP {
+  margin-bottom: 10px !important;
+}
+
+input {
+  margin-top: 0.5rem !important;
+  display: flex;
+  justify-content: flex-start;
+  width: 100% !important;
+}
+
+.userformDiv {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-direction: column;
+}
+
+.userformDiv input {
+  width: 23vw !important;
+}
+
+#userformdata {
+  margin-bottom: 1rem;
+}
+
+@media (max-width: 768px) {
+  .userformDiv input {
+    width: 58vw !important;
+  }
+}
+
+.stored-data {
+  margin-top: 10px;
+}
