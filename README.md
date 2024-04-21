@@ -5,7 +5,7 @@
 Here's an overview of the project's folder structure:
 
 ```plaintext
-/
+
 |-- public
 |-- src
 |   |-- assets
