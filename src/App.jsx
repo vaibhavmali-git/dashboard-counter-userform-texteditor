@@ -15,6 +15,9 @@ function App() {
           <Route path="/dashboard" element={<Dashboard />} />
         </Routes>
       </Router>
+      <footer style={{ textAlign: "center"}}>
+        Made with 💖 by <span style={{ fontWeight: "bold" }}>Vaibhav Mali</span>
+      </footer>
     </>
   );
 }

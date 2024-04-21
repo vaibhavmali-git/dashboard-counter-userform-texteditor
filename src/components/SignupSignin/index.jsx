@@ -69,14 +69,14 @@ function SignupSigninComponent() {
   return (
     <>
       {loginForm ? (
-        <div className="signup-wrapper">
-          <h2 style={{ textAlign: "center" }}>Login</h2>
+        <div className="signup-wrapper" >
+          <h2 style={{ textAlign: "center", padding:"25px" }}>Login</h2>
 
           <form>
             <Button
               onClick={googgleAuth}
               text={loading ? "Loading..." : "Login with Google"}
-              blue={true}
+              blue={false}
             />
 
             <p className="p-login" onClick={() => setLoginForm(!loginForm)}>
@@ -87,12 +87,12 @@ function SignupSigninComponent() {
         </div>
       ) : (
         <div className="signup-wrapper">
-          <h2 style={{ textAlign: "center" }}>Sign Up </h2>
+          <h2 style={{ textAlign: "center" , padding:"25px"}}>Sign Up </h2>
           <form>
             <Button
               onClick={googgleAuth}
               text={loading ? "Loading..." : "Signup with Google"}
-              blue={true}
+              blue={false}
             />
             <p className="p-login" onClick={() => setLoginForm(!loginForm)}>
               Or Have an Account Already?{" "}

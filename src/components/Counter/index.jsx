@@ -13,8 +13,12 @@ function Counter() {
   });
 
   const { backgroundColor } = useSpring({
-    from: { backgroundColor: "#FDE65A" },
-    to: { backgroundColor: `rgb(${counter * 10}, ${255 - counter * 10}, 100)` },
+    from: { backgroundColor: "#808080" }, // Start with gray
+    to: {
+      backgroundColor: `rgb(${128 - counter * 10}, ${128 - counter * 10}, ${
+        128 - counter * 10
+      })`,
+    },
     config: { duration: 500 },
   });
 
@@ -35,6 +39,7 @@ function Counter() {
   const resetCounter = () => {
     setCounter(0);
   };
+  console.log("Background color:", backgroundColor);
 
   return (
     <>

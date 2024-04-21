@@ -17,7 +17,7 @@ input {
 }
 
 .userformDiv input {
-  width: 23vw !important;
+  width: 100% !important;
 }
 
 #userformdata {
