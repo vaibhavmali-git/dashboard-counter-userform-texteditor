@@ -1,7 +1,10 @@
-# dashboard-counter-userform-texteditor
+# Project Name
 
 ## Folder Structure
 
+Here's an overview of the project's folder structure:
+
+```plaintext
 /
 |-- public
 |-- src
@@ -29,3 +32,4 @@
 |-- package-lock.json
 |-- package.json
 |-- README.md
+```
