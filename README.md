@@ -1,6 +1,6 @@
 # Dashboard-counter-userform-texteditor
 
-## Folder Structure
+## Component Structure
 
 Here's an overview of the project's folder structure:
 
