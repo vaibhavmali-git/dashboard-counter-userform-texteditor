@@ -41,7 +41,7 @@ Here's an overview of the project's folder structure:
 - `src`: Contains the main source code, including components, assets, and other relevant files.
 
 ## Subfolders within `src`
-- `assets`: Holds static resources such as images or other multimedia content.
+- `assets`: Holds static resources.
 - `components`: Contains various React components, with multiple subfolders representing different types of components:
   - `Common Components`: Contains shared UI elements like `Button`, `Header`, and `Input`.
   - `Counter`: Implements a "Counter Component" with increment, decrement, reset, background color changes, and data persistence across re-renders.
