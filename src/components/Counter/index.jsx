@@ -13,7 +13,7 @@ function Counter() {
   });
 
   const { backgroundColor } = useSpring({
-    from: { backgroundColor: "#808080" }, // Start with gray
+    from: { backgroundColor: "#808080" },
     to: {
       backgroundColor: `rgb(${128 - counter * 10}, ${128 - counter * 10}, ${
         128 - counter * 10

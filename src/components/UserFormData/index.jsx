@@ -1,4 +1,5 @@
 import React, { useState, useEffect } from "react";
+import { Snackbar, Alert, Button } from "@mui/material";
 import "./styles.css";
 
 const UserDataForm = () => {
@@ -8,23 +9,24 @@ const UserDataForm = () => {
     email: "",
     phone: "",
   });
-
-  const [isSubmitted, setIsSubmitted] = useState(false);
+  const [isUnsavedChanges, setIsUnsavedChanges] = useState(false);
+  const [snackbarOpen, setSnackbarOpen] = useState(false);
   const [storedData, setStoredData] = useState([]);
 
+  // Handle form changes and mark as unsaved
   const handleChange = (e) => {
     const { name, value } = e.target;
     setFormData((prevData) => ({
       ...prevData,
       [name]: value,
     }));
+    setIsUnsavedChanges(true);
   };
 
+  // Handle form submission and save to local storage
   const handleSubmit = (e) => {
     e.preventDefault();
-
-    const userId = generateUserId();
-
+    const userId = Math.floor(Math.random() * 1000);
     saveFormDataToLocalstorage(userId, formData);
 
     setFormData({
@@ -34,14 +36,9 @@ const UserDataForm = () => {
       phone: "",
     });
 
-    setIsSubmitted(true);
-
-    // Fetch the updated data after saving
+    setSnackbarOpen(true);
+    setIsUnsavedChanges(false);
     loadStoredData();
-  };
-
-  const generateUserId = () => {
-    return Math.floor(Math.random() * 1000);
   };
 
   const saveFormDataToLocalstorage = (userId, data) => {
@@ -50,43 +47,54 @@ const UserDataForm = () => {
     localStorage.setItem("userData", JSON.stringify(existingData));
   };
 
-  const handleBeforeUnload = (e) => {
-    if (Object.values(formData).some((value) => value !== "")) {
-      e.preventDefault();
-      e.returnValue = "";
+  const handleSnackbarClose = (event, reason) => {
+    if (reason === "clickaway") {
+      return;
     }
+    setSnackbarOpen(false);
   };
 
-  useEffect(() => {
-    window.addEventListener("beforeunload", handleBeforeUnload);
-    return () => window.removeEventListener("beforeunload", handleBeforeUnload);
-  }, [formData]);
-
-  useEffect(() => {
-    if (isSubmitted) {
-      alert("Your data has been stored in local storage.");
-      setIsSubmitted(false); // Reset to prevent multiple alerts
-    }
-  }, [isSubmitted]);
-
-  // Load stored data from local storage
   const loadStoredData = () => {
     const data = JSON.parse(localStorage.getItem("userData")) || [];
     setStoredData(data);
   };
 
+  const handleBeforeUnload = (e) => {
+    if (isUnsavedChanges) {
+      e.preventDefault();
+      e.returnValue = "";
+    }
+  };
+
+  // Add event listener for window unload with dependency on unsaved changes
   useEffect(() => {
-    loadStoredData(); // Load stored data when the component mounts
+    window.addEventListener("beforeunload", handleBeforeUnload);
+    return () => {
+      window.removeEventListener("beforeunload", handleBeforeUnload);
+    };
+  }, [isUnsavedChanges]);
+
+  useEffect(() => {
+    loadStoredData();
   }, []);
 
   return (
     <div id="userformdata">
       <h1 className="user-dataH1">User Data Form</h1>
-      {/* Display the stored data */}
+
+      {/* Display stored data */}
       <div className="stored-data">
         <h3 style={{ textAlign: "center" }}>Stored Data</h3>
         {storedData.length === 0 ? (
-          <p style={{textAlign:"center", fontStyle:"italic", fontSize:"12px"}}>No stored data in localstorage.</p>
+          <p
+            style={{
+              textAlign: "center",
+              fontStyle: "italic",
+              fontSize: "12px",
+            }}
+          >
+            No stored data.
+          </p>
         ) : (
           <ul>
             {storedData.map((data, index) => (
@@ -98,21 +106,21 @@ const UserDataForm = () => {
                 }}
                 key={index}
               >
-                {index + 1}. <span style={{ fontWeight: "bold" }}>UID: </span>
-                {data.userId}:{" "}
-                <span style={{ fontWeight: "bold" }}>Name: </span>
+                {index + 1}. <span style={{ fontWeight: "bold" }}>UID:</span>
+                {data.userId}: <span style={{ fontWeight: "bold" }}>Name:</span>
                 {data.name},{" "}
-                <span style={{ fontWeight: "bold" }}>Address: </span>
+                <span style={{ fontWeight: "bold" }}>Address:</span>
                 {data.address},{" "}
-                <span style={{ fontWeight: "bold" }}>E-mail: </span>
-                {data.email},{" "}
-                <span style={{ fontWeight: "bold" }}>Phone: </span>
+                <span style={{ fontWeight: "bold" }}>Email:</span>
+                {data.email}, <span style={{ fontWeight: "bold" }}>Phone:</span>
                 {data.phone}
               </li>
             ))}
           </ul>
         )}
       </div>
+
+      {/* User data form */}
       <div className="userformDiv">
         <div className="signup-wrapper">
           <form onSubmit={handleSubmit}>
@@ -175,6 +183,21 @@ const UserDataForm = () => {
           </form>
         </div>
       </div>
+
+      {/* Snackbar for submission feedback */}
+      <Snackbar
+        open={snackbarOpen}
+        autoHideDuration={3000}
+        onClose={handleSnackbarClose}
+      >
+        <Alert
+          onClose={handleSnackbarClose}
+          severity="success"
+          sx={{ width: "100%" }}
+        >
+          Your data has been stored in local storage.
+        </Alert>
+      </Snackbar>
     </div>
   );
 };

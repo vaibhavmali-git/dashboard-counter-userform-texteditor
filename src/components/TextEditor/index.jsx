@@ -1,13 +1,11 @@
-import React, { useState, useRef } from "react";
-import "./styles.css";
+import React, { useState, useEffect, useRef } from "react";
 import JoditEditor from "jodit-react";
-import { useEffect } from "react";
+import "./styles.css";
 
-function TextEditor() {
+const TextEditor = () => {
   const editor = useRef(null);
   const [content, setContent] = useState("");
 
-  // Function to convert JSON data to a readable text
   const formatData = (data) => {
     if (Array.isArray(data)) {
       return data
@@ -22,33 +20,38 @@ function TextEditor() {
 
   // Load data from local storage when the component mounts
   useEffect(() => {
-    const savedContent = localStorage.getItem("userData");
-    if (savedContent) {
-      const parsedData = JSON.parse(savedContent);
-      const formattedContent = formatData(parsedData);
-      setContent(formattedContent);
+    const userData = localStorage.getItem("userData");
+    const editorContent = localStorage.getItem("editorContent");
+
+    if (editorContent) {
+      setContent(editorContent);
+    } else if (userData) {
+      const parsedData = JSON.parse(userData);
+      const formattedData = formatData(parsedData);
+      setContent(formattedData);
     }
   }, []);
 
   const handleEditorChange = (newContent) => {
     setContent(newContent);
-    localStorage.setItem("userData", newContent);
+    localStorage.setItem("editorContent", newContent);
   };
 
   return (
-    <>
+    <div>
       <h1 className="user-dataH1">Text Editor</h1>
       <div id="textedior">
-        <div div="rich-editor">
+        <div className="rich-editor">
           <JoditEditor
             ref={editor}
             value={content}
-            onBlur={(newContent) => setContent(newContent)}
+            onBlur={(newContent) => handleEditorChange(newContent)}
+            onChange={(newContent) => handleEditorChange(newContent)}
           />
         </div>
       </div>
-    </>
+    </div>
   );
-}
+};
 
 export default TextEditor;

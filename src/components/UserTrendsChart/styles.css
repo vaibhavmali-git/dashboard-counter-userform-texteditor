@@ -64,18 +64,18 @@ h1 {
   .user-profiles {
     padding: 10px;
     gap: 2rem;
-    flex-direction: column; /* Ensures vertical stacking */
+    flex-direction: column; 
   }
 
   .user-profiles .user-details {
     height: auto;
-    width: 350px; /* Full width */
+    width: 350px; 
   }
 
   .user-profiles .line-chart {
     height: auto;
     padding: 1rem;
-    max-width: 100%; /* Ensures it doesn't exceed parent width */
-    overflow: hidden; /* Prevents overflow */
+    max-width: 100%; 
+    overflow: hidden;
   }
 }

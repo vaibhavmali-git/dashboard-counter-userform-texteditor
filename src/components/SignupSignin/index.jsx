@@ -1,9 +1,6 @@
 import React, { useState } from "react";
 import "./styles.css";
-import Input from "../Common Components/Input";
 import Button from "../Common Components/Button";
-import { createUserWithEmailAndPassword } from "firebase/auth";
-import { signInWithEmailAndPassword } from "firebase/auth";
 import { toast } from "react-toastify";
 import { auth, db } from "../../firebase";
 import { useNavigate } from "react-router-dom";
@@ -69,8 +66,8 @@ function SignupSigninComponent() {
   return (
     <>
       {loginForm ? (
-        <div className="signup-wrapper" >
-          <h2 style={{ textAlign: "center", padding:"25px" }}>Login</h2>
+        <div className="signup-wrapper">
+          <h2 style={{ textAlign: "center", padding: "25px" }}>Login</h2>
 
           <form>
             <Button
@@ -87,7 +84,7 @@ function SignupSigninComponent() {
         </div>
       ) : (
         <div className="signup-wrapper">
-          <h2 style={{ textAlign: "center" , padding:"25px"}}>Sign Up </h2>
+          <h2 style={{ textAlign: "center", padding: "25px" }}>Sign Up </h2>
           <form>
             <Button
               onClick={googgleAuth}
